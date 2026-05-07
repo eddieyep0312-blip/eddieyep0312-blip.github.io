@@ -59,15 +59,21 @@
 
   /* GRID */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:3px;}
-  .card{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:pointer;background:var(--bg3);}
-  .card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .5s;filter:brightness(.88);}
-  .card:hover img{transform:scale(1.06);filter:brightness(.45);}
-  .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.94) 0%,transparent 52%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px;opacity:0;transition:opacity .3s;}
-  .card:hover .overlay{opacity:1;}
-  .tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:5px;}
+  .card{position:relative;overflow:hidden;cursor:pointer;background:var(--bg3);display:flex;flex-direction:column;}
+  .card .thumb{position:relative;overflow:hidden;aspect-ratio:16/9;flex-shrink:0;}
+  .card .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .5s;filter:brightness(.82);}
+  .card:hover .thumb img{transform:scale(1.06);filter:brightness(.5);}
+  .card-info{padding:13px 16px 11px;background:var(--bg3);border-top:1px solid var(--border-s);transition:background .3s;}
+  .card:hover .card-info{background:var(--bg4);}
+  .info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
   .tag{font-size:9px;letter-spacing:1px;padding:2px 8px;border:1px solid var(--orange);color:var(--orange);text-transform:uppercase;}
-  .c-title{font-size:14px;font-weight:700;color:var(--text);}
-  .c-desc{font-size:11px;color:var(--muted);margin-top:2px;}
+  .img-count{font-size:10px;color:var(--dim);letter-spacing:.5px;}
+  .c-title{font-size:13px;font-weight:700;color:var(--text);}
+  .c-desc{font-size:11px;color:var(--muted);margin-top:3px;}
+  .preview-strip{display:flex;gap:3px;margin-top:9px;opacity:0;transition:opacity .3s;}
+  .card:hover .preview-strip{opacity:1;}
+  .strip-dot{flex:1;height:2px;background:var(--dim);border-radius:1px;}
+  .strip-dot.act{background:var(--orange);}
 
   /* LIGHTBOX */
   .lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.96);align-items:center;justify-content:center;}
@@ -150,8 +156,8 @@
     .tabs::-webkit-scrollbar{display:none;}
     .tab{white-space:nowrap;flex-shrink:0;}
     .grid{grid-template-columns:1fr;gap:2px;}
-    .overlay{opacity:1;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 60%);}
     .card img{filter:brightness(.8);}
+    .preview-strip{opacity:1;}
     .sk-layout{grid-template-columns:1fr;gap:32px;}
     .ab-layout{grid-template-columns:1fr;gap:28px;}
     .ab-text h3{font-size:18px;}
@@ -253,110 +259,114 @@
   </div>
   <div class="grid reveal" id="grid">
 
-    <!-- Amazon A+ -->
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="3.jpg" alt="项目背景">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">策划</span></div><div class="c-title">亲子零食品牌 · 项目背景</div><div class="c-desc">市场调研 · 品牌定位 · 设计方向制定</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="4.jpg" alt="婴儿忙碌板主图">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">主图</span></div><div class="c-title">婴儿忙碌板 · 主图设计</div><div class="c-desc">BJCrafts 16合1 · 场景图 · 卖点可视化</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="5.jpg" alt="婴儿忙碌板A+">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">A+</span></div><div class="c-title">婴儿忙碌板 · A+ 页面</div><div class="c-desc">Logo · 场景图 · 参数模块 · 移动端适配</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="6.jpg" alt="市场数据">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">数据</span></div><div class="c-title">市场数据调研页</div><div class="c-desc">销售数据可视化 · 转化率对比图表</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="7.jpg" alt="簇绒枪设计思路">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">产品设计</span></div><div class="c-title">簇绒枪 · 设计思路</div><div class="c-desc">结构拆解 · 卖点提炼 · 信息层级规划</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="8.jpg" alt="簇绒枪主图">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">主图</span></div><div class="c-title">簇绒枪 · 主图设计</div><div class="c-desc">Cut Pile Tufting Gun · 特性图标模块</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="9.jpg" alt="簇绒枪参数">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">A+</span></div><div class="c-title">簇绒枪 · 参数详情页</div><div class="c-desc">尺寸标注 · 功能参数 · 工艺说明</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="10.jpg" alt="簇绒枪场景">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">场景图</span></div><div class="c-title">簇绒枪 · 应用场景展示</div><div class="c-desc">多款成品地毯效果 · 使用场景渲染</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="11.jpg" alt="华夫饼机主图">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">主图</span></div><div class="c-title">商用华夫饼机 · 主图</div><div class="c-desc">KOSIEJINN 110V · 生活场景融合设计</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="12.jpg" alt="华夫饼机详情">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">详情页</span></div><div class="c-title">商用华夫饼机 · 产品详情</div><div class="c-desc">产品图 + 食材场景图 · 双图模块</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="13.jpg" alt="华夫饼机场景">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">场景图</span></div><div class="c-title">华夫饼机 · 家庭使用场景</div><div class="c-desc">拼贴式场景展示 · 多图信息图</div></div>
-    </div>
-    <div class="card" data-cat="amazon" onclick="lb(this)">
-      <img src="14.jpg" alt="华夫饼机卖点">
-      <div class="overlay"><div class="tags"><span class="tag">Amazon</span><span class="tag">A+</span></div><div class="c-title">华夫饼机 · 核心卖点页</div><div class="c-desc">4大卖点模块 · 双语说明 · 图文结合</div></div>
+    <!-- 亲子零食品牌 + 婴儿忙碌板 -->
+    <div class="card" data-cat="amazon" data-imgs='["3.jpg","6.jpg","4.jpg","5.jpg"]' data-title="亲子零食品牌 · 完整项目" onclick="lb(this)">
+      <div class="thumb"><img src="3.jpg" alt="亲子零食品牌"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">Amazon A+</span><span class="img-count">4 张图 →</span></div>
+        <div class="c-title">亲子零食品牌 · 完整项目</div>
+        <div class="c-desc">市场调研 · 主图设计 · A+ 页面 · 数据可视化</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div><div class="strip-dot"></div><div class="strip-dot"></div></div>
+      </div>
     </div>
 
-    <!-- Banner -->
-    <div class="card" data-cat="banner" onclick="lb(this)">
-      <img src="15.jpg" alt="Halloween Banner">
-      <div class="overlay"><div class="tags"><span class="tag">Banner</span><span class="tag">大促</span></div><div class="c-title">Halloween 促销 Banner</div><div class="c-desc">节日氛围设计 · 15% OFF 活动素材</div></div>
+    <!-- 美妆护肤品牌 -->
+    <div class="card" data-cat="amazon" data-imgs='["28.jpg","29.jpg","30.jpg","31.jpg"]' data-title="美妆护肤品牌 · A+ 系列" onclick="lb(this)">
+      <div class="thumb"><img src="28.jpg" alt="美妆护肤品牌"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">Amazon A+</span><span class="img-count">4 张图 →</span></div>
+        <div class="c-title">美妆护肤品牌 · A+ 系列</div>
+        <div class="c-desc">OSHIRMA · Veloura · Gatsby · MAAPILIM</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div><div class="strip-dot"></div><div class="strip-dot"></div></div>
+      </div>
     </div>
-    <div class="card" data-cat="banner" onclick="lb(this)">
-      <img src="16.jpg" alt="电子烟Banner">
-      <div class="overlay"><div class="tags"><span class="tag">Banner</span><span class="tag">独立站</span></div><div class="c-title">电子烟品牌 Banner 系列</div><div class="c-desc">ELF BAR · IJOY · OKK 多品牌广告素材</div></div>
+
+    <!-- 簇绒枪 -->
+    <div class="card" data-cat="amazon" data-imgs='["8.jpg","7.jpg","9.jpg","10.jpg"]' data-title="簇绒枪 · Tufting Gun" onclick="lb(this)">
+      <div class="thumb"><img src="8.jpg" alt="簇绒枪"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">Amazon A+</span><span class="img-count">4 张图 →</span></div>
+        <div class="c-title">簇绒枪 · Tufting Gun</div>
+        <div class="c-desc">主图 · 设计思路 · 参数详情 · 场景展示</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div><div class="strip-dot"></div><div class="strip-dot"></div></div>
+      </div>
+    </div>
+
+    <!-- 华夫饼机 -->
+    <div class="card" data-cat="amazon" data-imgs='["11.jpg","12.jpg","13.jpg","14.jpg"]' data-title="商用华夫饼机 · KOSIEJINN" onclick="lb(this)">
+      <div class="thumb"><img src="11.jpg" alt="商用华夫饼机"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">Amazon A+</span><span class="img-count">4 张图 →</span></div>
+        <div class="c-title">商用华夫饼机 · KOSIEJINN</div>
+        <div class="c-desc">主图 · 详情页 · 场景图 · 核心卖点</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div><div class="strip-dot"></div><div class="strip-dot"></div></div>
+      </div>
+    </div>
+
+    <!-- Halloween Banner -->
+    <div class="card" data-cat="banner" data-imgs='["15.jpg"]' data-title="Halloween 促销 Banner" onclick="lb(this)">
+      <div class="thumb"><img src="15.jpg" alt="Halloween Banner"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">Banner</span><span class="img-count">1 张图</span></div>
+        <div class="c-title">Halloween 促销 Banner</div>
+        <div class="c-desc">节日氛围设计 · 15% OFF 活动素材</div>
+        <div class="preview-strip"><div class="strip-dot act"></div></div>
+      </div>
+    </div>
+
+    <!-- 电子烟Banner -->
+    <div class="card" data-cat="banner" data-imgs='["16.jpg"]' data-title="电子烟品牌 Banner 系列" onclick="lb(this)">
+      <div class="thumb"><img src="16.jpg" alt="电子烟Banner"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">Banner</span><span class="img-count">1 张图</span></div>
+        <div class="c-title">电子烟品牌 Banner 系列</div>
+        <div class="c-desc">ELF BAR · IJOY · OKK 多品牌广告素材</div>
+        <div class="preview-strip"><div class="strip-dot act"></div></div>
+      </div>
     </div>
 
     <!-- Logo -->
-    <div class="card" data-cat="logo" onclick="lb(this)">
-      <img src="17.jpg" alt="Logo终稿">
-      <div class="overlay"><div class="tags"><span class="tag">Logo</span><span class="tag">品牌</span></div><div class="c-title">多品牌 Logo 设计 · 终稿</div><div class="c-desc">topcalcs · KACHA · kosi · BJCrafts</div></div>
-    </div>
-    <div class="card" data-cat="logo" onclick="lb(this)">
-      <img src="18.jpg" alt="Logo方案">
-      <div class="overlay"><div class="tags"><span class="tag">Logo</span><span class="tag">品牌</span></div><div class="c-title">多品牌 Logo 设计 · 方案</div><div class="c-desc">TopCats · Buildher · JRACRAFT · CXG</div></div>
+    <div class="card" data-cat="logo" data-imgs='["17.jpg","18.jpg"]' data-title="多品牌 Logo 设计" onclick="lb(this)">
+      <div class="thumb"><img src="17.jpg" alt="Logo设计"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">Logo</span><span class="img-count">2 张图 →</span></div>
+        <div class="c-title">多品牌 Logo 设计</div>
+        <div class="c-desc">topcalcs · KACHA · BJCrafts · CXG 等</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div></div>
+      </div>
     </div>
 
-    <!-- 3D -->
-    <div class="card" data-cat="3d" onclick="lb(this)">
-      <img src="19.jpg" alt="机械车建模">
-      <div class="overlay"><div class="tags"><span class="tag">3D</span><span class="tag">建模</span></div><div class="c-title">机械车 · 废土风建模</div><div class="c-desc">3ds Max 硬表面建模 · 多角度展示</div></div>
+    <!-- 机械车3D -->
+    <div class="card" data-cat="3d" data-imgs='["19.jpg","20.jpg"]' data-title="机械车 · 废土风格" onclick="lb(this)">
+      <div class="thumb"><img src="19.jpg" alt="机械车3D"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">3D 建模</span><span class="img-count">2 张图 →</span></div>
+        <div class="c-title">机械车 · 废土风格</div>
+        <div class="c-desc">3ds Max 硬表面建模 · KeyShot 渲染</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div></div>
+      </div>
     </div>
-    <div class="card" data-cat="3d" onclick="lb(this)">
-      <img src="20.jpg" alt="机械车渲染">
-      <div class="overlay"><div class="tags"><span class="tag">3D</span><span class="tag">渲染</span></div><div class="c-title">机械车 · KeyShot 渲染</div><div class="c-desc">材质贴图 · 灯光氛围 · 多视角渲染</div></div>
-    </div>
-    <div class="card" data-cat="3d" onclick="lb(this)">
-      <img src="21.jpg" alt="室内场景日光">
-      <div class="overlay"><div class="tags"><span class="tag">3D</span><span class="tag">场景</span></div><div class="c-title">室内场景 · 日光版</div><div class="c-desc">全场景道具建模 · 写实风格渲染</div></div>
-    </div>
-    <div class="card" data-cat="3d" onclick="lb(this)">
-      <img src="22.jpg" alt="室内场景夜光">
-      <div class="overlay"><div class="tags"><span class="tag">3D</span><span class="tag">场景</span></div><div class="c-title">室内场景 · 夜光版</div><div class="c-desc">灯光氛围营造 · 冷暖光对比渲染</div></div>
-    </div>
-    <div class="card" data-cat="3d" onclick="lb(this)">
-      <img src="23.jpg" alt="道具单体建模">
-      <div class="overlay"><div class="tags"><span class="tag">3D</span><span class="tag">道具</span></div><div class="c-title">室内道具 · 单体建模展示</div><div class="c-desc">家具/家电/生活用品全套道具建模</div></div>
+
+    <!-- 室内场景 -->
+    <div class="card" data-cat="3d" data-imgs='["21.jpg","22.jpg","23.jpg"]' data-title="室内场景 · 全套建模" onclick="lb(this)">
+      <div class="thumb"><img src="21.jpg" alt="室内场景3D"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">3D 场景</span><span class="img-count">3 张图 →</span></div>
+        <div class="c-title">室内场景 · 全套建模</div>
+        <div class="c-desc">日光版 · 夜光版 · 道具单体展示</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div><div class="strip-dot"></div></div>
+      </div>
     </div>
 
     <!-- 摄影 -->
-    <div class="card" data-cat="photo" onclick="lb(this)">
-      <img src="24.jpg" alt="摄影-美食">
-      <div class="overlay"><div class="tags"><span class="tag">摄影</span><span class="tag">美食</span></div><div class="c-title">美食摄影 · 光影氛围</div><div class="c-desc">食材质感 · 自然光构图</div></div>
-    </div>
-    <div class="card" data-cat="photo" onclick="lb(this)">
-      <img src="25.jpg" alt="摄影-街拍">
-      <div class="overlay"><div class="tags"><span class="tag">摄影</span><span class="tag">街拍</span></div><div class="c-title">街头摄影 · 夜景长曝</div><div class="c-desc">雨夜车流 · 天鹅湖光</div></div>
-    </div>
-    <div class="card" data-cat="photo" onclick="lb(this)">
-      <img src="26.jpg" alt="摄影-黑白">
-      <div class="overlay"><div class="tags"><span class="tag">摄影</span><span class="tag">黑白</span></div><div class="c-title">黑白纪实摄影</div><div class="c-desc">光影几何 · 街头人文 · 极简构图</div></div>
+    <div class="card" data-cat="photo" data-imgs='["24.jpg","25.jpg","26.jpg"]' data-title="摄影作品集" onclick="lb(this)">
+      <div class="thumb"><img src="24.jpg" alt="摄影作品"></div>
+      <div class="card-info">
+        <div class="info-row"><span class="tag">摄影</span><span class="img-count">3 张图 →</span></div>
+        <div class="c-title">摄影作品集</div>
+        <div class="c-desc">美食光影 · 夜景长曝 · 黑白纪实</div>
+        <div class="preview-strip"><div class="strip-dot act"></div><div class="strip-dot"></div><div class="strip-dot"></div></div>
+      </div>
     </div>
 
   </div>
@@ -461,21 +471,26 @@
     });
   }
 
-  // Lightbox
-  let cards=[], idx=0;
+  // Lightbox — 项目级图集模式
+  let projectImgs=[], projectTitle='', idx=0;
   function lb(card){
-    cards=Array.from(document.querySelectorAll('.card:not([style*="display: none"])'));
-    idx=cards.indexOf(card);
-    show(idx);
+    projectImgs=JSON.parse(card.dataset.imgs);
+    projectTitle=card.dataset.title||card.querySelector('.c-title').textContent;
+    idx=0;
+    showImg();
     document.getElementById('lb').classList.add('open');
     document.body.style.overflow='hidden';
   }
-  function show(i){
-    const c=cards[i];
-    document.getElementById('lbImg').src=c.querySelector('img').src;
-    document.getElementById('lbCap').textContent=c.querySelector('.c-title').textContent+' ('+(i+1)+'/'+cards.length+')';
+  function showImg(){
+    document.getElementById('lbImg').src=projectImgs[idx];
+    const nav=projectImgs.length>1?' ('+( idx+1)+'/'+projectImgs.length+')':'';
+    document.getElementById('lbCap').textContent=projectTitle+nav;
+    // 仅有单图时隐藏左右箭头
+    const hide=projectImgs.length<=1;
+    document.querySelector('.lb-p').style.display=hide?'none':'';
+    document.querySelector('.lb-n').style.display=hide?'none':'';
   }
-  function lbNav(d){idx=(idx+d+cards.length)%cards.length;show(idx);}
+  function lbNav(d){idx=(idx+d+projectImgs.length)%projectImgs.length;showImg();}
   function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
   function lbBg(e){if(e.target===document.getElementById('lb'))closeLb();}
   document.addEventListener('keydown',e=>{
