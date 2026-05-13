@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>吴兆宇 · 跨境电商视觉设计师</title>
+<meta name="description" content="吴兆宇，5年跨境电商视觉设计师，擅长 Amazon A+、Banner、3D 建模渲染，广州随时到岗。">
+<meta property="og:title" content="吴兆宇 · 跨境电商视觉设计师">
+<meta property="og:description" content="5年跨境电商视觉经验，Amazon A+、Banner、3D 全流程独立完成，广州随时到岗。">
+<meta property="og:image" content="https://eddieyep0312-blip.github.io/1.jpg">
+<meta property="og:url" content="https://eddieyep0312-blip.github.io">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23E87722'/><text x='50%25' y='72%25' font-size='20' font-family='Arial' font-weight='bold' fill='%23000' text-anchor='middle'>E</text></svg>">
+<link rel="preload" as="image" href="1.webp">
 <style>
   :root {
     --orange: #E87722;
@@ -247,7 +256,7 @@
   <div class="reveal">
     <p class="s-label">Portfolio</p>
     <h2 class="s-title">精选<span>作品</span></h2>
-    <p class="s-desc">涵盖 Amazon A+、Banner 广告、品牌 Logo、3D 建模渲染、摄影，全流程独立完成。</p>
+    <p class="s-desc">涵盖 Amazon A+、Banner 广告、家具设计、品牌 Logo、3D 建模渲染、摄影，全流程独立完成。</p>
   </div>
   <div class="tabs reveal">
     <button class="tab on" onclick="filter('all',this)">全部</button>
@@ -499,6 +508,14 @@
     if(e.key==='Escape')closeLb();
     if(e.key==='ArrowLeft')lbNav(-1);
     if(e.key==='ArrowRight')lbNav(1);
+  });
+
+  // 手机触摸滑动灯箱
+  let tsX=0;
+  document.getElementById('lb').addEventListener('touchstart',e=>{tsX=e.touches[0].clientX;},{passive:true});
+  document.getElementById('lb').addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tsX;
+    if(Math.abs(dx)>40){lbNav(dx<0?1:-1);e.stopPropagation();}
   });
 
   // 悬停预加载灯箱图片
